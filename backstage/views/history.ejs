@@ -1,0 +1,195 @@
+<%include components/header.ejs%>
+<%include components/menu.ejs%>
+		<!-- start: Content -->
+		<div id="content" class="span10">
+			<ul class="breadcrumb">
+				<li>
+					<i class="icon-home"></i>
+					<a href="borrow.html">Home</a>
+					<i class="icon-angle-right"></i>
+				</li>
+				<li><a href="#">借用/归还记录查询</a></li>
+			</ul>
+			<div class="searchInput">
+				<div class="searchInputRow1">
+					<form class="navbar-form navbar-left">
+						<div class="form-group">
+							<input id="searchStuId" type="text" class="form-control" placeholder="请输入学号"/>
+							<button id="searchStuIdBtn" type="button" class="btn btn-default" @click="getHistoryInfo"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>搜索</button>
+						</div>
+					</form>
+				</div>
+				<div class="searchInputRow2">
+					<form class="navbar-form navbar-left">
+						<div class="form-group">
+							<input id="searchEquipNum" type="text" class="form-control" placeholder="请输入设备编号"/>
+							<button id="searchEquipNumBtn" type="button" class="btn btn-default"  @click="getHistoryInfo"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>搜索</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="row-fluid sortable">
+				<div class="box span12">
+					<div class="box-header">
+						<h2><i class="halflings-icon white align-justify"></i><span class="break"></span>借用/归还记录查询</h2>
+						<div class="box-icon">
+							<a href="#" class="btn-setting"><i class="halflings-icon white wrench"></i></a>
+							<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+							<a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+						</div>
+					</div>
+
+
+					<div class="box-content" id="historyTable">
+						<table class="table table-striped">
+							<thead>
+							<tr>
+								<th>学号</th>
+								<th>姓名</th>
+								<th>器材编号</th>
+								<th>器材名称</th>
+								<th>申请日期</th>
+								<th>归还日期</th>
+								<th>联系方式</th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr v-for="history in histories">
+								<td>{{history.userID}}</td>
+								<td class="center">{{history.userName}}</td>
+								<td class="center">{{history.equipID}}</td>
+								<td class="center">{{history.equipName}}</td>
+								<td class="center">{{history.addDate | time}}</td>
+								<td class="center">{{history.returnApplyDate}}</td>
+								<td class="center">{{history.userTel}}</td>
+							</tr>
+							</tbody>
+						</table>
+						<div class="pagination pagination-centered">
+							<ul>
+								<li><a href="#"><</a></li>
+								<li class="active">
+									<a href="#">1</a>
+								</li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">></a></li>
+							</ul>
+						</div>
+					</div>
+				</div><!--/span-->
+
+			</div><!--/row-->
+
+		</div><!--/.fluid-container-->
+
+		<!-- end: Content -->
+	</div><!--/#content.span10-->
+</div><!--/fluid-row-->
+
+<div class="modal hide fade" id="myModal">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">×</button>
+		<h3>Settings</h3>
+	</div>
+	<div class="modal-body">
+		<p>Here settings can be configured...</p>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Close</a>
+		<a href="#" class="btn btn-primary">Save changes</a>
+	</div>
+</div>
+
+<div class="common-modal modal fade" id="common-Modal1" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-content">
+		<ul class="list-inline item-details">
+			<li><a href="#">Admin templates</a></li>
+			<li><a href="http://themescloud.org">Bootstrap themes</a></li>
+		</ul>
+	</div>
+</div>
+
+<%include components/footer.ejs%>
+
+<!-- start: JavaScript-->
+<script src="http://apps.bdimg.com/libs/vue/1.0.14/vue.js"></script>
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/jquery-migrate-1.0.0.min.js"></script>
+<script src="js/jquery-ui-1.10.0.custom.min.js"></script>
+<script src="js/jquery.ui.touch-punch.js"></script>
+<script src="js/modernizr.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script src='js/fullcalendar.min.js'></script>
+<script src='js/jquery.dataTables.min.js'></script>
+<script src="js/excanvas.js"></script>
+<script src="js/jquery.flot.js"></script>
+<script src="js/jquery.flot.pie.js"></script>
+<script src="js/jquery.flot.stack.js"></script>
+<script src="js/jquery.flot.resize.min.js"></script>
+<script src="js/jquery.chosen.min.js"></script>
+<script src="js/jquery.uniform.min.js"></script>
+<script src="js/jquery.cleditor.min.js"></script>
+<script src="js/jquery.noty.js"></script>
+<script src="js/jquery.elfinder.min.js"></script>
+<script src="js/jquery.raty.min.js"></script>
+<script src="js/jquery.iphone.toggle.js"></script>
+<script src="js/jquery.uploadify-3.1.min.js"></script>
+<script src="js/jquery.gritter.min.js"></script>
+<script src="js/jquery.imagesloaded.js"></script>
+<script src="js/jquery.masonry.min.js"></script>
+<script src="js/jquery.knob.modified.js"></script>
+<script src="js/jquery.sparkline.min.js"></script>
+<script src="js/counter.js"></script>
+<script src="js/retina.js"></script>
+<script src="js/custom.js"></script>
+<!-- end: JavaScript-->
+</body>
+</html>
+<script>
+	var vw = new Vue({
+	 el:'body',
+	 data:{
+	 histories:null
+	 },
+	//方法
+		methods:{
+	     getHistoryInfo:function (event) {
+	         var This=this;
+             console.log($(event.target.previousElementSibling).attr('id'));
+             console.log($(event.target.previousElementSibling).val());
+             var term=$(event.target.previousElementSibling).attr('id');
+             var termValue=$(event.target.previousElementSibling).val();
+                 $.ajax({
+                     url: 'getHistory',
+                     type: 'POST',
+                     dataType: 'text',
+                     data: {term: term,termValue:termValue},
+                 })
+                     .done(function(data) {
+                         console.log(data);
+                         This.histories=JSON.parse(data);
+                         console.log("success");
+                     });
+
+             }
+         }
+	 //计算属性
+//	 computed:{
+//	 tableNums:{
+//	 get:function () {
+//	 return this.legnums / 4;
+//	 },
+//	 set:function (n) {
+//	 this.legnums = n * 4;
+//	 }
+//	 }
+//	 }
+
+	 });
+    Vue.filter('time', function (value) {
+        return new Date(value).toLocaleDateString().replace(/年|月/g, "-").replace(/日/g, " ");
+    })
+</script>
